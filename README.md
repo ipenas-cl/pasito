@@ -106,6 +106,7 @@ npm run dev          # http://localhost:5173
 npm test             # unit + component tests (Vitest, Testing Library, fake-indexeddb)
 npx playwright install chromium
 npm run test:e2e     # e2e on tablet + phone viewports, incl. axe and offline checks
+E2E_BASE_URL=https://ipenas-cl.github.io/pasito/ npm run test:e2e   # same suite against the live site
 npm run screenshots  # regenerate docs/screenshots
 npm run build        # static build in dist/ (BASE=/pasito/ for GitHub Pages)
 ```
@@ -117,7 +118,7 @@ Speech recognition needs Chrome, Edge or Safari, and the mic is only available o
 - **Domain unit tests:** spaced-repetition transitions and session picking, difficulty controller, speech matching, number generators (property-style checks over 1,000 generated tasks), syllable builder, tokenizer and boundary mapping, streaks, gate.
 - **Adapter test:** IndexedDB repository, including cascading deletes, run against fake-indexeddb.
 - **Component tests:** first-run onboarding behind the gate, a kid view with no links, gate rejection, speech feedback, locked stages, the self-check fallback, numbers answer and level-up, word building, story highlighting.
-- **Playwright e2e** on tablet and phone: every main flow, a real pointer drag-and-drop, persistence across reloads, the parent dashboard and English toggle, **axe** on each module, and **offline reload through the service worker**.
+- **Playwright e2e** on tablet and phone: every main flow, a real pointer drag-and-drop, persistence across reloads, the parent dashboard and English toggle, a full parent journey (create a child → play every module → progress updates → switch child, no dead ends), a run with no speech APIs at all, **axe** on each module, and **offline reload through the service worker**.
 - **CI** (GitHub Actions): lint, typecheck, unit and component tests, e2e, and Lighthouse CI with a11y and best-practices budgets. A separate workflow deploys to GitHub Pages.
 
 ## License

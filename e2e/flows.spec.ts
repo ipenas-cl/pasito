@@ -2,7 +2,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { test, expect, createChild, passGate } from './fixtures';
 
 test('first run creates a profile behind the parent gate', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('./');
   await expect(page.getByTestId('start')).toBeVisible();
   await createChild(page, 'Tomi');
   await expect(page.getByTestId('profile-Tomi')).toBeVisible();
@@ -78,7 +78,7 @@ test('kid view has no links and passes axe', async ({ kidPage: page }) => {
 
 test('works offline after the first visit (PWA)', async ({ page, context, browserName }) => {
   test.skip(browserName !== 'chromium');
-  await page.goto('/');
+  await page.goto('./');
   await page.evaluate(() => navigator.serviceWorker.ready);
   await page.reload(); // controlled by the SW now
   await context.setOffline(true);

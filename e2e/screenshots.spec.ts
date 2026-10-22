@@ -5,7 +5,7 @@ test.skip(!process.env.SCREENSHOTS, 'run with npm run screenshots');
 
 test('capture README screenshots', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/?seed=7');
+  await page.goto('./?seed=7');
   await createChild(page, 'Sofi');
   await page.getByTestId('parent-btn').click();
   await passGate(page);

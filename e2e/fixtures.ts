@@ -29,7 +29,7 @@ export const test = base.extend<{ kidPage: Page }>({
   },
   /** A page with one child profile ("Sofi") already created via the parent gate. */
   kidPage: async ({ page }, use) => {
-    await page.goto('/?seed=7');
+    await page.goto('./?seed=7');
     await createChild(page, 'Sofi');
     await page.getByTestId('profile-Sofi').click();
     await use(page);
