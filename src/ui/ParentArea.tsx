@@ -7,7 +7,7 @@ export const AVATARS = ['🦊', '🐼', '🐯', '🐸', '🦄', '🐵', '🐧', 
 
 interface Summary { events: ActivityEvent[]; cards: Record<string, CardState>; level: number }
 
-export function ParentArea({ children, onChange, onExit }: { children: Child[]; onChange: () => void; onExit: () => void }) {
+export function ParentArea({ children, onChange, onExit, onPlay }: { children: Child[]; onChange: () => void; onExit: () => void; onPlay: (c: Child) => void }) {
   const { t, lang, setLang, repo, clock } = useApp();
   const [data, setData] = useState<Record<string, Summary>>({});
   const [name, setName] = useState('');
@@ -56,7 +56,7 @@ export function ParentArea({ children, onChange, onExit }: { children: Child[]; 
 
   return (
     <main className="screen parent">
-      <TopBar title={`👨‍👩‍👧 ${t.dashboard}`} right={<button type="button" className="text-btn" onClick={onExit} data-testid="exit-parent">{t.exit}</button>} />
+      <TopBar title={`👨‍👩‍👧 ${t.dashboard}`} right={<button type="button" className="text-btn" onClick={onExit} data-testid="exit-parent">← {t.exit}</button>} />
       <p className="privacy">🔐 {t.privacy}</p>
 
       {children.length === 0 && <p>{t.noChildren}</p>}
@@ -75,6 +75,7 @@ export function ParentArea({ children, onChange, onExit }: { children: Child[]; 
                 <h2>{c.name}</h2>
                 <button type="button" className="text-btn danger" onClick={() => void remove(c)}>{t.delete}</button>
               </header>
+              <button type="button" className="primary play-btn" onClick={() => onPlay(c)} data-testid={`play-${c.name}`}>▶️ {t.playWith(c.name)}</button>
               <dl className="kpis">
                 <div><dt>🔥 {t.currentStreak}</dt><dd data-testid="streak">{plural(currentStreak(s.events, now))}</dd></div>
                 <div><dt>🏅 {t.bestStreak}</dt><dd>{plural(longestStreak(s.events))}</dd></div>
@@ -96,12 +97,16 @@ export function ParentArea({ children, onChange, onExit }: { children: Child[]; 
               </table>
               <figure>
                 <figcaption>{t.last7}</figcaption>
+                {week.every((d) => d.count === 0) ? (
+                  <p className="empty-chart" data-testid="empty-chart">{t.noActivity}</p>
+                ) : (
                 <svg viewBox="0 0 140 50" className="spark" role="img" aria-label={week.map((d) => `${d.day}: ${d.count}`).join(', ')}>
                   {week.map((d, i) => {
                     const h = (d.count / max) * 40;
-                    return <rect key={d.day} x={i * 20 + 3} y={45 - h} width="14" height={Math.max(h, 1)} rx="3" />;
+                    return <rect key={d.day} x={i * 20 + 3} y={45 - h} width="14" height={h} rx="3" />;
                   })}
                 </svg>
+                )}
               </figure>
             </article>
           );

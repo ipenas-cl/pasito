@@ -142,3 +142,5 @@ fieldset { border: 0; padding: 0; margin: 12px 0; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .celebration { display: none; }
 }
+.play-btn { width: 100%; margin: .5rem 0; }
+.empty-chart { color: #777; font-size: .9rem; margin: .25rem 0; }

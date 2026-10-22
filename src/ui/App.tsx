@@ -32,7 +32,7 @@ export function App({ seed }: { seed?: number }) {
 
   let content;
   if (screen === 'parent') {
-    content = <ParentArea children={children} onChange={() => void reload()} onExit={() => setScreen(child ? 'home' : 'profiles')} />;
+    content = <ParentArea children={children} onChange={() => void reload()} onExit={() => setScreen(child && children.some((c) => c.id === child.id) ? 'home' : 'profiles')} onPlay={(c) => { setChild(c); setScreen('home'); }} />;
   } else if (screen === 'profiles' || !child) {
     content = (
       <main className="screen">

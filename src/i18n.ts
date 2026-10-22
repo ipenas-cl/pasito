@@ -63,7 +63,9 @@ const es = {
   privacy: 'Todo se guarda solo en este dispositivo. Sin anuncios, sin cuentas, sin rastreo.',
   welcome: '¡Hola! Pasito ayuda a niños de 2 a 7 años a hablar, contar y leer jugando.',
   start: 'Comenzar',
-  exit: 'Salir',
+  exit: 'Volver',
+  playWith: (n: string) => `Jugar con ${n}`,
+  noActivity: 'Sin actividad todavía. ¡Juega una ronda y aparecerá aquí!',
   numberLevel: 'Nivel de números',
 };
 
@@ -131,7 +133,9 @@ const en: Dict = {
   privacy: 'Everything stays on this device. No ads, no accounts, no tracking.',
   welcome: 'Hi! Pasito helps children aged 2 to 7 learn to speak, count and read through play.',
   start: 'Get started',
-  exit: 'Exit',
+  exit: 'Back',
+  playWith: (n: string) => `Play with ${n}`,
+  noActivity: 'No activity yet. Play a round and it will show up here!',
   numberLevel: 'Numbers level',
 };
 

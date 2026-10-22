@@ -3,7 +3,7 @@ import type { Listener, Speaker } from '../domain';
 /** Adapter over the Web Speech API (SpeechSynthesis). Always resolves, even if the engine never fires `end`. */
 export class WebSpeaker implements Speaker {
   get supported() {
-    return typeof window !== 'undefined' && 'speechSynthesis' in window;
+    return typeof window !== 'undefined' && !!window.speechSynthesis && typeof window.SpeechSynthesisUtterance === 'function';
   }
 
   private pickVoice(lang: string): SpeechSynthesisVoice | undefined {
