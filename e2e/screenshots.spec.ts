@@ -29,6 +29,7 @@ test('capture README screenshots', async ({ page }) => {
   await page.screenshot({ path: shot('numbers') });
   // play a few rounds so the dashboard has data
   for (let i = 0; i < 5; i++) {
+    await expect(page.getByTestId('objects').locator('span').first()).toBeVisible();
     const n = await page.getByTestId('objects').locator('span').count();
     await page.getByTestId(`choice-${n}`).click();
     await page.getByTestId('next').click();

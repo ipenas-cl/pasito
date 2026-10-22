@@ -25,6 +25,7 @@ test('speak: hear a word, say it, get feedback', async ({ kidPage: page }) => {
 
 test('numbers: drag the answer into the box', async ({ kidPage: page }) => {
   await page.getByTestId('mod-numbers').click();
+  await expect(page.getByTestId('objects').locator('span').first()).toBeVisible();
   const count = await page.getByTestId('objects').locator('span').count();
   const choice = page.getByTestId(`choice-${count}`);
   const drop = page.getByTestId('dropzone');

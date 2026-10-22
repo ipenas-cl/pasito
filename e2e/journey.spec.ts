@@ -27,6 +27,7 @@ test('full parent journey: create, play, progress, switch child, no dead ends', 
 
   // Play numbers by tapping the right answer, then go back home.
   await page.getByTestId('mod-numbers').click();
+  await expect(page.getByTestId('objects').locator('span').first()).toBeVisible();
   const count = await page.getByTestId('objects').locator('span').count();
   await page.getByTestId(`choice-${count}`).click();
   await expect(page.getByTestId('feedback')).toContainText('¡Muy bien!');
